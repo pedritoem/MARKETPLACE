@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 import os
+#from django.contrib.auth import get_user_model
 
 #lo cambiaamos cuando estamos extendiendo un usuario, nos permite usar el foreing key del usuario
 User = settings.AUTH_USER_MODEL
