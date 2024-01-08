@@ -1,6 +1,7 @@
 from django.db import models
 from django.conf import settings
 import os
+from django.core.validators import FileExtensionValidator
 #from django.contrib.auth import get_user_model
 
 #lo cambiaamos cuando estamos extendiendo un usuario, nos permite usar el foreing key del usuario
@@ -23,8 +24,8 @@ class Product(models.Model):
     slug=models.SlugField(unique=True)
 
     content_url=models.URLField(blank=True,null=True)
+    # content_file=models.FileField(blank=True, null=True, validators=[FileExtensionValidator(allowed_extensions=['mp3'])])
     content_file=models.FileField(blank=True, null=True)
-
     active = models.BooleanField(default=False)
 
     price= models.PositiveIntegerField(default=100) #cents Cant be lower than 50 cents@
@@ -35,7 +36,7 @@ class Product(models.Model):
     
     #para hacer que se vea bien el precio
     def price_display(self):
-        return "{0:2f}".format(self.price / 100)
+        return "{0:.2f}".format(self.price / 100)
     
 class PurchasedProduct(models.Model):
     email = models.EmailField() #El email del user que compró o nuevo
